@@ -1,5 +1,6 @@
-// src/features/Characters/character.jsx
 import React, { useEffect, useState } from 'react';
+import './characters.css';
+
 
 function CharacterList() {
   const [characters, setCharacters] = useState([]);
@@ -21,9 +22,9 @@ function CharacterList() {
   return (
     <div>
       <h1>Characters</h1>
-      <div>
+      <div className='character-list'>
         {characters.map((character) => (
-          <div key={character.id}>
+          <div key={character.id} className='character-card'>
             <img src={character.image} alt={character.name} />
             <h2>{character.name}</h2>
             <p>{character.species}</p>

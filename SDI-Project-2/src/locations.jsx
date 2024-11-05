@@ -1,5 +1,5 @@
-// src/features/Locations/location.jsx
 import React, { useEffect, useState } from 'react';
+import './locations.css';
 
 function LocationList() {
   const [locations, setLocations] = useState([]);
@@ -21,9 +21,9 @@ function LocationList() {
   return (
     <div>
       <h1>Locations</h1>
-      <div>
+      <div className='location-list'>
         {locations.map((location) => (
-          <div key={location.id}>
+          <div key={location.id} className='location-card'>
             <h2>{location.name}</h2>
             <p>Type: {location.type}</p>
             <p>Dimension: {location.dimension}</p>
