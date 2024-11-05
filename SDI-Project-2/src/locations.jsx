@@ -1,32 +1,37 @@
+// src/features/Locations/location.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchLocations } from './api.js';
 
+function LocationList() {
+  const [locations, setLocations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function locationList() {
-    const [locations, setLocations] = useState([]);
-
-    useEffect(() => {
-        const getLocations = async () => {
-            const data = await fetchLocations();
-            setLocations(data);
-        };
-        getLocations();
-    }, []);
-
-    return (
-        <div>
-        <h1>Locations</h1>
-        <div>
-            {locations.map((location) => (
-            <div key={location.id}>
-                <img src={location.image} alt={location.name} />
-                <h2>{location.name}</h2>
-                <p>{location.species}</p>
-            </div>
-            ))}
-        </div>
-        </div>
-    );
-    }
+  useEffect(() => {
+    const getLocations = async () => {
+      const response = await fetch('https://rickandmortyapi.com/api/location');
+      const data = await response.json();
+      setLocations(data.results);
+      setLoading(false);
+    };
     
-export default locationList;
+    getLocations();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>Locations</h1>
+      <div>
+        {locations.map((location) => (
+          <div key={location.id}>
+            <h2>{location.name}</h2>
+            <p>Type: {location.type}</p>
+            <p>Dimension: {location.dimension}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default LocationList;

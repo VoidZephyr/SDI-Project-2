@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { fetchEpisodes} from '../../api.js';
 
+function EpisodeList() {
+  const [episodes, setEpisodes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function episodeList() {
-    const [episodes, setEpisodes] = useState([]);
-
-    useEffect(() => {
-        const getEpisodes = async () => {
-            const data = await fetchEpisodes();
-            setEpisodes(data);
-        };
-        getEpisodes();
-    }, []);
-
-    return (
-        <div>
-        <h1>Episodes</h1>
-        <div>
-            {episodes.map((episode) => (
-            <div key={episode.id}>
-                <img src={episode.image} alt={episode.name} />
-                <h2>{episode.name}</h2>
-                <p>{episode.species}</p>
-            </div>
-            ))}
-        </div>
-        </div>
-    );
-    }
+  useEffect(() => {
+    const getEpisodes = async () => {
+      const response = await fetch('https://rickandmortyapi.com/api/episode');
+      const data = await response.json();
+      setEpisodes(data.results);
+      setLoading(false);
+    };
     
-export default episodeList; 
+    getEpisodes();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>Episodes</h1>
+      <div>
+        {episodes.map((episode) => (
+          <div key={episode.id}>
+            <h2>{episode.name}</h2>
+            <p>Air Date: {episode.air_date}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default EpisodeList;
