@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { fetchEpisodes} from '../../api';
+import { fetchEpisodes} from '../../api.js';
 
 
 function episodeList() {
     const [episodes, setEpisodes] = useState([]);
 
     useEffect(() => {
-        const getEpisodes = asyc () = > {
+        const getEpisodes = async () => {
             const data = await fetchEpisodes();
             setEpisodes(data);
         };

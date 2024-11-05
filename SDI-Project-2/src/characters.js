@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { fetchCharacters } from '../../api';
+import { fetchCharacters } from '../../api.js';
 
 
 function CharacterList() {
     const [characters, setCharacters] = useState([]);
 
     useEffect(() => {
-        const getCharacters = asyc () = > {
+        const getCharacters = async () => {
             const data = await fetchCharacters();
             setCharacters(data);
         };

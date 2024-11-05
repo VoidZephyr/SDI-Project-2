@@ -1,7 +1,7 @@
 const apiUrl = "https://rickandmortyapi.com/api";
 
-export const fetchCharacters = async () =>{
-    const response = await fetch(`${apiUrl}/characters`);
+export const fetchCharacters = async () => {
+    const response = await fetch(`${apiUrl}/character`);
     const data = await response.json();
     return data.results;
 
