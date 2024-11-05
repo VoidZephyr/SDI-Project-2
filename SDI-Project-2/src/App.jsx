@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import CharacterList from './features/Characters/characters.js';
-import EpisodeList from './features/Episodes/episodes.js';
-import LocationList from './features/Locations/locations.js';
+import CharacterList from './characters.js';
+import EpisodeList from './episodes.js';
+import LocationList from './locations.js';
 
 function App() {
   return (

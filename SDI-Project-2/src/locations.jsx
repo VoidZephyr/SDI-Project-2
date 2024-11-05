@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchLocations } from '../../api.js';
+import { fetchLocations } from './api.js';
 
 
 function locationList() {
