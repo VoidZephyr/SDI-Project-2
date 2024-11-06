@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CharacterList from './characters.jsx';
-import CharacterDetail from './CharacterDetail.jsx';
+import CharacterDetail from './characterDetail.jsx';
 import EpisodeList from './episodes.jsx';
 import LocationList from './locations.jsx';
 import './App.css';
