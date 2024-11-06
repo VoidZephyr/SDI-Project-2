@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CharacterList from './characters.jsx';
+import CharacterDetail from './CharacterDetail.jsx';
 import EpisodeList from './episodes.jsx';
 import LocationList from './locations.jsx';
 import './App.css';
@@ -32,6 +33,7 @@ function App() {
 
         <Routes>
           <Route path="/characters" element={<CharacterList />} />
+          <Route path="/characters/:id" element={<CharacterDetail />} /> {/* Dynamic route */}
           <Route path="/episodes" element={<EpisodeList />} />
           <Route path="/locations" element={<LocationList />} />
         </Routes>
