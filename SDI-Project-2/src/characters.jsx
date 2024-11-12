@@ -1,42 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './characters.css';
+import { useParams, useNavigate } from 'react-router-dom';
 
-function CharacterList() {
-  const [characters, setCharacters] = useState([]);
+function CharacterDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCharacters = async () => {
+    const fetchCharacter = async () => {
       try {
-        const response = await fetch('https://rickandmortyapi.com/api/character');
+        const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
         const data = await response.json();
-        setCharacters(data.results);
+        setCharacter(data);
       } catch (error) {
-        console.error('Error fetching characters:', error);
+        console.error('Error fetching character details:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCharacters();
-  }, []);
+    fetchCharacter();
+  }, [id]);
 
   if (loading) return <p>Loading...</p>;
+  if (!character) return <p>Character not found.</p>;
 
   return (
-    <div className="character-list">
-      {characters.map((character) => (
-        <div key={character.id} className="character-card">
-          <Link to={`/characters/${character.id}`}>
-            <img src={character.image} alt={character.name} />
-            <h2>{character.name}</h2>
-            <p>{character.species}</p>
-          </Link>
-        </div>
-      ))}
+    <div className="character-detail">
+      <button onClick={() => navigate(-1)} className="back-button">
+        Back
+      </button>
+      <h1>{character.name}</h1>
+      <img src={character.image} alt={character.name} />
+      <p>Species: {character.species}</p>
+      <p>Status: {character.status}</p>
+      <p>Gender: {character.gender}</p>
+      <p>Location: {character.location.name}</p>
     </div>
   );
 }
 
-export default CharacterList;
+export default CharacterDetail;
