@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function CharacterDetail() {
-  const { id } = useParams(); // Get the character ID from the URL
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,9 @@ function CharacterDetail() {
 
   return (
     <div className="character-detail">
+      <button onClick={() => navigate(-1)} className="back-button">
+        Back
+      </button>
       <h1>{character.name}</h1>
       <img src={character.image} alt={character.name} />
       <p>Species: {character.species}</p>
